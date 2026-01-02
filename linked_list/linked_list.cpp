@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <cstddef>
 
 using namespace std;
 
@@ -50,6 +51,15 @@ bool checkIfPresent(Node *head, int val) {
   return false;
 }
 
+Node* removeHead(Node* head){
+    if(head == NULL) return head;
+
+    Node* temp = head;
+    head = head->next;
+    delete temp;
+    return head;
+}
+
 int main() {
   vector<int> arr = {12, 19, 21, 8, 14};
   Node *head = convertArrtoLL(arr);
@@ -60,5 +70,7 @@ int main() {
   }
 
   cout << endl << "length of the linked-list: " << lengthofLL(head) << endl;
-  cout << "Is 8 present in the linked-list: " << checkIfPresent(head, 9);
+  cout << "Is 8 present in the linked-list: " << checkIfPresent(head, 8) << endl;
+  head = removeHead(head);
+  cout << "after head removed length of LL: " << lengthofLL(head) << endl;
 }
