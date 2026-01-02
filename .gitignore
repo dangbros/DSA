@@ -1,0 +1,4 @@
+# Ignore common C++ binaries
+a.out
+*.out
+*.exe
