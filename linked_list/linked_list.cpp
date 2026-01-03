@@ -171,6 +171,22 @@ Node* insertAtK(Node* head, int k, int val){
     return head;
 }
 
+Node* insertBeforeEle(Node* head, int ele, int val){
+    if(head == NULL) return NULL;
+    if (head->data == ele) return new Node(val, head);
+
+    Node* temp = head;
+    while(temp->next != NULL){
+        if (temp->next->data == ele){
+            Node* newNode = new Node(val, temp->next);
+            temp->next = newNode;
+            break;
+        }
+        temp = temp->next;
+    }
+    return head;
+}
+
 int main() {
   vector<int> arr = {12, 19, 21, 8, 14};
   Node *head = convertArrtoLL(arr);
@@ -181,6 +197,6 @@ int main() {
   // << lengthofLL(head) << endl; head = removeTail(head); printLL(head);
   // head = deleteEle(head, 17);
   // printLL(head);
-  head = insertAtK(head, 6, 5);
+  head = insertBeforeEle(head, 7, 5);
   printLL(head);
 }
