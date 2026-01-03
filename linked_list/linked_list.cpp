@@ -106,6 +106,24 @@ Node *deleteK(Node *head, int k) {
   return head;
 }
 
+Node *deleteEle(Node *head, int val) {
+    if (head == NULL) return head;
+    if (head->data == val) return removeHead(head);
+
+    Node *temp = head;
+    while (temp->next != NULL) {
+        if (temp->next->data == val){
+            Node *delNode = temp->next;
+            temp->next = delNode->next;
+            delete delNode;
+            break;
+        }
+        temp = temp->next;
+    }
+
+    return head;
+}
+
 int main() {
   vector<int> arr = {12, 19, 21, 8, 14};
   Node *head = convertArrtoLL(arr);
@@ -114,6 +132,6 @@ int main() {
   // cout << "Is 8 present in the linked-list: " << checkIfPresent(head, 8) <<
   // endl; head = removeHead(head); cout << "after head removed length of LL: "
   // << lengthofLL(head) << endl; head = removeTail(head); printLL(head);
-  head = deleteK(head, 4);
+  head = deleteEle(head, 17);
   printLL(head);
 }
