@@ -51,41 +51,69 @@ bool checkIfPresent(Node *head, int val) {
   return false;
 }
 
-Node* removeHead(Node* head){
-    if(head == NULL) return head;
-
-    Node* temp = head;
-    head = head->next;
-    delete temp;
+Node *removeHead(Node *head) {
+  if (head == NULL)
     return head;
+
+  Node *temp = head;
+  head = head->next;
+  delete temp;
+  return head;
 }
 
-Node* removeTail(Node * head){
-    Node* temp = head;
-    Node* newHead = temp;
-    while(temp->next->next != NULL){
-        temp = temp->next;
-    }
-    temp->next = NULL;
-    return newHead;
+Node *removeTail(Node *head) {
+  if (head == NULL || head->next == NULL)
+    return NULL;
+
+  Node *temp = head;
+  while (temp->next->next != NULL) {
+    temp = temp->next;
+  }
+  delete temp->next;
+  temp->next = nullptr;
+  return head;
 }
-void printLL(Node* head){
-    Node *temp = head;
-    while (temp) {
-      cout << temp->data << " ";
-      temp = temp->next;
-    }
-    cout << endl;
+
+void printLL(Node *head) {
+  Node *temp = head;
+  while (temp) {
+    cout << temp->data << " ";
+    temp = temp->next;
+  }
+  cout << endl;
+}
+
+Node *deleteK(Node *head, int k) {
+  if (head == NULL || k <= 0)
+    return head;
+  int len = lengthofLL(head);
+  if (k > len) {
+    cout << "out of range value" << endl;
+    return head;
+  }
+  if (k == 1) {
+    return removeHead(head);
+  }
+  Node *temp = head;
+  int cnt = 1;
+  while (cnt < k - 1) {
+    temp = temp->next;
+    cnt++;
+  }
+  Node *delNode = temp->next;
+  temp->next = delNode->next;
+  delete delNode;
+  return head;
 }
 
 int main() {
   vector<int> arr = {12, 19, 21, 8, 14};
   Node *head = convertArrtoLL(arr);
   printLL(head);
-  cout << endl << "length of the linked-list: " << lengthofLL(head) << endl;
-  cout << "Is 8 present in the linked-list: " << checkIfPresent(head, 8) << endl;
-  head = removeHead(head);
-  cout << "after head removed length of LL: " << lengthofLL(head) << endl;
-  head = removeTail(head);
+  // cout << endl << "length of the linked-list: " << lengthofLL(head) << endl;
+  // cout << "Is 8 present in the linked-list: " << checkIfPresent(head, 8) <<
+  // endl; head = removeHead(head); cout << "after head removed length of LL: "
+  // << lengthofLL(head) << endl; head = removeTail(head); printLL(head);
+  head = deleteK(head, 4);
   printLL(head);
 }
