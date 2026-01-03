@@ -141,6 +141,36 @@ Node* insertTail(Node* head, int val){
     return head;
 }
 
+Node* insertAtK(Node* head, int k, int val){
+    if(k <= 0) return head;
+
+    if(k > lengthofLL(head) + 1){
+        cout << "out of bound error" << endl;
+        return head;
+    }
+
+    if(head == NULL){
+        if (k == 1) return new Node(val);
+        else return NULL;
+    }
+
+    if (k == 1) return new Node(val, head);
+
+    int cnt = 1;
+    Node* temp = head;
+
+    while(temp != NULL){
+        if (cnt == k - 1){
+            Node* newNode = new Node(val, temp->next);
+            temp->next = newNode;
+            break;
+        }
+        temp = temp->next;
+        cnt++;
+    }
+    return head;
+}
+
 int main() {
   vector<int> arr = {12, 19, 21, 8, 14};
   Node *head = convertArrtoLL(arr);
@@ -151,6 +181,6 @@ int main() {
   // << lengthofLL(head) << endl; head = removeTail(head); printLL(head);
   // head = deleteEle(head, 17);
   // printLL(head);
-  head = insertTail(head, 10);
+  head = insertAtK(head, 6, 5);
   printLL(head);
 }
