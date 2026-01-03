@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <bits/stdc++.h>
 #include <cstddef>
 
@@ -60,17 +61,32 @@ Node* removeHead(Node* head){
     return head;
 }
 
+Node* removeTail(Node * head){
+    Node* temp = head;
+    Node* newHead = temp;
+    while(temp->next->next != NULL){
+        temp = temp->next;
+    }
+    temp->next = NULL;
+    return newHead;
+}
+void printLL(Node* head){
+    Node *temp = head;
+    while (temp) {
+      cout << temp->data << " ";
+      temp = temp->next;
+    }
+    cout << endl;
+}
+
 int main() {
   vector<int> arr = {12, 19, 21, 8, 14};
   Node *head = convertArrtoLL(arr);
-  Node *temp = head;
-  while (temp) {
-    cout << temp->data << " ";
-    temp = temp->next;
-  }
-
+  printLL(head);
   cout << endl << "length of the linked-list: " << lengthofLL(head) << endl;
   cout << "Is 8 present in the linked-list: " << checkIfPresent(head, 8) << endl;
   head = removeHead(head);
   cout << "after head removed length of LL: " << lengthofLL(head) << endl;
+  head = removeTail(head);
+  printLL(head);
 }
