@@ -124,6 +124,23 @@ Node *deleteEle(Node *head, int val) {
     return head;
 }
 
+Node* insertHead(Node* head, int val){
+    return new Node(val, head);
+}
+
+Node* insertTail(Node* head, int val){
+    if(head == NULL){
+        return new Node(val);
+    }
+    Node* temp = head;
+    while(temp->next != NULL){
+        temp = temp->next;
+    }
+    Node* newNode = new Node(val);
+    temp->next = newNode;
+    return head;
+}
+
 int main() {
   vector<int> arr = {12, 19, 21, 8, 14};
   Node *head = convertArrtoLL(arr);
@@ -132,6 +149,8 @@ int main() {
   // cout << "Is 8 present in the linked-list: " << checkIfPresent(head, 8) <<
   // endl; head = removeHead(head); cout << "after head removed length of LL: "
   // << lengthofLL(head) << endl; head = removeTail(head); printLL(head);
-  head = deleteEle(head, 17);
+  // head = deleteEle(head, 17);
+  // printLL(head);
+  head = insertTail(head, 10);
   printLL(head);
 }
