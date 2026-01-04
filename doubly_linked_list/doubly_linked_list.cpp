@@ -122,11 +122,35 @@ Node* removeEle(Node* head, int ele) {
     return head;
 }
 
+Node* insertBeforeHead(Node* head, int val) {
+    Node* newHead = new Node(val, head, nullptr);
+    head->back = newHead;
+    return newHead;
+}
+
+Node* insertBeforeTail(Node* head, int val) {
+    if(head->next == NULL)
+        return insertBeforeHead(head, val);
+
+    Node* tail = head;
+    while(tail->next != NULL) {
+        tail = tail->next;
+    }
+
+    Node* prev = tail->back;
+    Node* newNode = new Node(val, tail, prev);
+
+    prev->next = newNode;
+    tail->back = newNode;
+
+    return head;
+}
+
 int main(){
     vector<int> arr = {2, 4, 6, 7, 8};
     Node* head = arrToDLL(arr);
     print(head);
-    head = removeEle(head, 6);
+    head = insertBeforeTail(head, 12);
     print(head);
     return 0;
 }
