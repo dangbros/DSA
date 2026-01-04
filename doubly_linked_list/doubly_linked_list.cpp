@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include <cstddef>
 #include <vector>
 
 using namespace std;
@@ -37,8 +38,18 @@ Node* arrToDLL(vector<int> arr){
     return head;
 }
 
+void print(Node* head) {
+    Node* temp = head;
+    while(temp != NULL){
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
 int main(){
     vector<int> arr = {2, 3, 6, 7, 8};
     Node* head = arrToDLL(arr);
+    print(head);
     return 0;
 }
