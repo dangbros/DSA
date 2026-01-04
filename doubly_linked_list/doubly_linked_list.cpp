@@ -104,12 +104,29 @@ Node* removeKth(Node* head, int k) {
     return head;
 }
 
+Node* removeEle(Node* head, int ele) {
+    if(head == NULL) return NULL;
+    if(ele == head->data) return removeHead(head);
+
+    Node* temp = head;
+    while(temp != NULL) {
+        if(ele == temp->data) {
+            if(temp->next == NULL) return removeTail(head);
+            temp->back->next = temp->next;
+            temp->next->back = temp->back;
+            delete temp;
+            break;
+        }
+        temp = temp->next;
+    }
+    return head;
+}
 
 int main(){
     vector<int> arr = {2, 4, 6, 7, 8};
     Node* head = arrToDLL(arr);
     print(head);
-    head = removeKth(head, 1);
+    head = removeEle(head, 6);
     print(head);
     return 0;
 }
