@@ -173,11 +173,27 @@ void insertBeforeNode(Node* node, int val) {
     prev->next = newNode;
     node->back = newNode;
 }
+
+Node* reverseDLL(Node* head) {
+    if(head == NULL || head->next == NULL) return head;
+
+    Node* prev = NULL;
+    Node* current = head;
+    while(current != NULL) {
+        prev = current->back;
+        current->back = current->next;
+        current->next = prev;
+        current = current->back;
+    }
+
+    return prev->back;
+}
+
 int main(){
     vector<int> arr = {2, 4, 6, 7, 8};
     Node* head = arrToDLL(arr);
     print(head);
-    insertBeforeNode(head->next->next->next->next, 0);
+    head = reverseDLL(head);
     print(head);
     return 0;
 }
