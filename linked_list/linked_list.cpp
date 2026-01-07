@@ -187,6 +187,23 @@ Node* insertBeforeEle(Node* head, int ele, int val){
     return head;
 }
 
+Node* ReverseLL(Node* head){
+    if(head == NULL || head->next == NULL) return head;
+
+    Node* front = NULL;
+    Node* prev = NULL;
+    Node* temp = head;
+
+    while(temp != NULL) {
+        front = temp->next;
+        temp->next = prev;
+        prev = temp;
+        temp = front;
+    }
+
+    return prev;
+}
+
 int main() {
   vector<int> arr = {12, 19, 21, 8, 14};
   Node *head = convertArrtoLL(arr);
@@ -197,6 +214,6 @@ int main() {
   // << lengthofLL(head) << endl; head = removeTail(head); printLL(head);
   // head = deleteEle(head, 17);
   // printLL(head);
-  head = insertBeforeEle(head, 7, 5);
+  head = ReverseLL(head);
   printLL(head);
 }
