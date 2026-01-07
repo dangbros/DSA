@@ -204,6 +204,16 @@ Node* ReverseLL(Node* head){
     return prev;
 }
 
+Node* Reverse(Node* head) {
+    if(head == NULL || head->next == NULL) return head;
+
+    Node* newHead = Reverse(head->next);
+    Node* front = head->next;
+    front->next = head;
+    head->next = NULL;
+    return newHead;
+}
+
 int main() {
   vector<int> arr = {12, 19, 21, 8, 14};
   Node *head = convertArrtoLL(arr);
@@ -214,6 +224,6 @@ int main() {
   // << lengthofLL(head) << endl; head = removeTail(head); printLL(head);
   // head = deleteEle(head, 17);
   // printLL(head);
-  head = ReverseLL(head);
+  head = Reverse(head);
   printLL(head);
 }
